@@ -1,5 +1,6 @@
 # BAY AREA TRIP GUIDE APP
 
+### Authors: Wenzhu Chen, Xiaoyan Qin
 
 Node+Express runs on http://localhost:3001
 React dev server runs http://localhost:3000
