@@ -3,8 +3,7 @@ const { MongoClient, ObjectId } = require("mongodb");
 function MyDB() {
   const myDB = {};
 
-  // const url = process.env.MONGO_URL;
-  const url = "mongodb+srv://user1:123321@cluster0.1calo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  const url = process.env.MONGO_URL;
   const DB_NAME = "tripsApp";
 
   myDB.getTrips = async (query = {}, maxRecords = 50) => {
@@ -26,6 +25,4 @@ function MyDB() {
   return myDB;
 }
 
-
 module.exports = MyDB();
-
