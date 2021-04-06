@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-export default function LoginPage(props) {
+export default function RegistPage(props) {
   
 
   return (
-    <div className = "/login">
-      <div className="title"><h3>Sign in to upload posts and save your favourite posts.</h3></div>
-      
+    <div className="/regist">
+      <div className="title"><h3>Create New Account</h3></div>
       <div className="row">
         <div className="col-sm-4 box border">
-          <form id="formLogin">
+          <form id="formRegist">
             <div className="mb-2">
               <label for="InputUsername" className="form-label">Username</label>
               <input
@@ -33,24 +32,27 @@ export default function LoginPage(props) {
               id="error"
               className="alert-danger"
               role="alert"
-              style={{marginBottom: "4px",}}
+              style={{marginBottom: "4px"}}
             ></div>
             <div className="d-grid gap-2 mx-auto center-font">
-              <button type="submit" className="btn btn-primary">Sign In</button>
+              <button type="submit" className="btn btn-success">Sign Up</button>
             </div>
           </form>
           <hr />
           <div className="center-font">
+            <p className="secondfont">Already have an account?</p>
             <Link
-              className="btn btn-success secondfont"
-              to="/regist"
+              className="btn btn-primary secondfont"
+              to="/login"
               role="button"
-              >Creat New Account</Link>
+              >Sign In</Link>
           </div>
         </div>
       </div>
-
     </div>
+
+
+
 
   );
 }

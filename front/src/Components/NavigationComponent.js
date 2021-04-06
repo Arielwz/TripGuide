@@ -66,6 +66,10 @@ export default function NavigationComponent() {
               Search
             </button>
           </form>
+
+          <Link className="btn btn-success" type="submit" role="button" to="/login" style={{marginLeft: "30px"}}>
+              Sign In
+            </Link>
         </div>
       </div>
     </nav>
