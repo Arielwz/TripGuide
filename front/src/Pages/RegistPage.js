@@ -1,8 +1,28 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import "./Authen.css";
+import PropTypes from "prop-types";
 
 export default function RegistPage(props) {
-  
+  const [errorText, setErrorText] = React.useState('');
+  const onSubmit = async (values) => {
+    setErrorText('');
+    const response = await fetch("/regist", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values), // body data type must match "Content-Type" header
+    });
+    debugger;
+    const res = await response.json();
+    if (res && res.success) {
+      props.history.replace('/viewRecipe');
+    } else {
+      setErrorText(res.message || "sign in failed!");
+    }
+  };
 
   return (
     <div className="/regist">
