@@ -4,14 +4,18 @@ import React from "react";
 function Show (props) {
 
     const renderTrips = () => {
-        console.log(props.trips);
-        if (props.trips.success)
-        return props.trips.trips
+        // console.log(props.trips);
+        // if (props.trips.success)
+        // return props.trips.trips
+        return (props.trips || [])
         .map((t) => (
         <div>
+
         <p>{t.name}</p>
+        <img src = {t.img} />
         <p>{t.location}</p>
         <p>{t.content}</p>
+
 
         </div>))
     };

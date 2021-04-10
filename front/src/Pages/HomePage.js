@@ -2,10 +2,16 @@ import ShowList from '../Components/ShowList';
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function HomePage() {
+const HomePage =  function HomePage(props) {
   return (
     <div>
-      {<ShowList />}
+      {<ShowList searchKey={props.searchKey} />}
     </div>
   );
 }
+
+HomePage.propTypes = {
+  searchKey: PropTypes.string
+};
+
+export default HomePage;

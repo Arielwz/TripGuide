@@ -1,8 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import React, {useState} from 'react';
+import { Link, useLocation, withRouter } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 
-// copy bootstrap navbar 的格式过来，要把所有的a 改成link， href改成to=对应的route path
-export default function NavigationComponent() {
+const Nav = function NavigationComponent(props) {
+  const [searchKey, setSearchKey] = useState('');
   const location = useLocation();
   console.log("Render NavigationComponent", location);
 
@@ -29,10 +31,10 @@ export default function NavigationComponent() {
             <li className="nav-item">
               <Link
                 className={
-                  "nav-link" + (location.pathname === "/list" ? " active" : "")
+                  "nav-link" + (location.pathname === "/" ? " active" : "")
                 }
                 aria-current="page"
-                to="/list"
+                to="/"
               >
                 List
               </Link>
@@ -61,17 +63,42 @@ export default function NavigationComponent() {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={(ev) => {
+                setSearchKey(ev.target.value);
+              }}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" onClick={(ev) => {
+               ev.preventDefault();
+              props.onSearch && props.onSearch(searchKey);
+            }}>
               Search
             </button>
           </form>
 
-          <Link className="btn btn-success" type="submit" role="button" to="/login" style={{marginLeft: "30px"}}>
-              Sign In
-            </Link>
+          <div className="btn btn-success" type="submit" role="button" style={{marginLeft: "30px"}} onClick={async (ev) => {
+            ev.preventDefault();
+            const {
+              hasLogin,
+              onLogout
+            } = props;
+            if (hasLogin) {
+              onLogout && onLogout();
+            } else {
+              props.history.replace('/login');
+            }
+          }}>
+              {props.hasLogin ? 'Logout' : 'Sign In'}
+            </div>
         </div>
       </div>
     </nav>
   );
 }
+
+Nav.propTypes = {
+  hasLogin: PropTypes.bool,
+  onLogout: PropTypes.func,
+  onSearch: PropTypes.func
+};
+
+export default withRouter(Nav);
