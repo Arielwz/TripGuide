@@ -6,22 +6,6 @@ function MyDB() {
   const url = process.env.MONGO_URL;
   const DB_NAME = "tripsApp";
 
-  myDB.getTrips = async (query = {}, maxRecords = 50) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      return await client
-        .db(DB_NAME)
-        .collection("trips")
-        .find(query)
-        .limit(maxRecords)
-        .toArray();
-    } finally {
-      client.close();
-    }
-  };
-
   // creat users info
   myDB.creatUser = async (user) => {
     let client;
@@ -61,6 +45,35 @@ function MyDB() {
       return users;
     } finally {
       console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  //create trip
+  myDB.createTrip = async (trip) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const res = await client.db(DB_NAME).collection("trips").insertOne(trip);
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  myDB.getTrips = async (query = {}, maxRecords = 50) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      return await client
+        .db(DB_NAME)
+        .collection("trips")
+        .find(query)
+        .limit(maxRecords)
+        .toArray();
+    } finally {
       client.close();
     }
   };

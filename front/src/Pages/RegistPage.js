@@ -1,42 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import "./Authen.css";
 import PropTypes from "prop-types";
 
-export default function RegistPage(props) {
-  const [errorText, setErrorText] = React.useState('');
-  const onSubmit = async (values) => {
-    setErrorText('');
-    const response = await fetch("/regist", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values), // body data type must match "Content-Type" header
-    });
-    debugger;
-    const res = await response.json();
-    if (res && res.success) {
-      props.history.replace('/viewRecipe');
-    } else {
-      setErrorText(res.message || "sign in failed!");
-    }
-  };
-
+const RegistPage = function RegistPage(props) {
+  const [userInfo, setUserInfo] = useState({});
+  const [errorText, setErrorText] = useState("");
   return (
     <div className="/regist">
       <div className="title"><h3>Create New Account</h3></div>
       <div className="row">
         <div className="col-sm-4 box border">
-          <form id="formRegist">
+          <form id="formRegist" onSubmit={async (ev) => {
+            ev.preventDefault();
+            if (!userInfo.username || !userInfo.password) {
+              setErrorText("username and password required!");
+              return;
+            }
+            setErrorText("");
+            const response = await fetch("/regist", {
+              method: "POST", // *GET, POST, PUT, DELETE, etc.
+              credentials: "same-origin", // include, *same-origin, omit
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userInfo), // body data type must match "Content-Type" header
+            });
+            const res = await response.json();
+            if (res && res.success) {
+              props.history.push('/login');
+            } else {
+              setErrorText( res.message || "Regist failed!");
+            }
+          }}>
             <div className="mb-2">
               <label for="InputUsername" className="form-label">Username</label>
               <input
                 type="text"
                 className="form-control"
-                name="username"
-                id="name"
+                onChange={(ev) => {
+                  setUserInfo({
+                    ...userInfo,
+                    username: ev.target.value
+                  });
+                }}
               />
             </div>
             <div className="mb-3">
@@ -44,16 +51,20 @@ export default function RegistPage(props) {
               <input
                 type="password"
                 className="form-control"
-                name="password"
-                id="pwd"
+                onChange={(ev) => {
+                  setUserInfo({
+                    ...userInfo,
+                    password: ev.target.value
+                  });
+                }}
               />
             </div>
-            <div
+            {!!errorText && <div
               id="error"
               className="alert-danger"
               role="alert"
-              style={{marginBottom: "4px"}}
-            ></div>
+              style={{marginBottom: "4px",}}
+            >{errorText}</div>}
             <div className="d-grid gap-2 mx-auto center-font">
               <button type="submit" className="btn btn-success">Sign Up</button>
             </div>
@@ -71,8 +82,9 @@ export default function RegistPage(props) {
       </div>
     </div>
 
-
-
-
   );
 }
+
+RegistPage.propTypes = {};
+export default RegistPage;
+  

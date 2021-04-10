@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 const myDB = require("../db/MyDB.js");
@@ -50,8 +50,50 @@ router.get("/logout", async (req, res) => {
   });
 });
 
+// get users
+router.get("/getUsers", async (req, res) => {
+  const users = await myDB.searchUser({ username: req.query.username });
+  res.send({ users });
+});
 
+// create trips
+router.post("/createTrip", async (req, res) => {
+  if (!req.session.userInfo) {
+    res.status(401).send({ success: false, message: "Please sign in first!" });
+  }
+  let uploadPath;
+  const trip = req.body;
+
+  const image = req.files.image;
+  trip.img = "/images/" + image.name;
+
+  await myDB.createTrip(trip);
+
+  uploadPath = __dirname + "/../public/images/" + image.name;
+
+  image.mv(uploadPath, function (err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send({ success: true });
+  });
+});
+
+// check session
+router.get("/checkSession", async (req, res) => {
+  if (!req.session.userInfo) {
+    return res.status(401).send({ success: false });
+  }
+  res.send({ success: true });
+});
+
+// search
+router.get("/getTrips", async (req, res) => {
+  const searchKey = req.query.searchKey;
+  const trips = await myDB.getTrips({
+    title: { $regex: searchKey },
+  });
+  res.send({ trips, success: true });
+});
 
 module.exports = router;
-
-
