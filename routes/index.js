@@ -90,4 +90,5 @@ router.get("/getTrips", async (req, res) => {
   res.send({ trips, success: true });
 });
 
+
 module.exports = router;
