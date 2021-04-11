@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 function MyDB() {
   const myDB = {};
@@ -62,6 +62,7 @@ function MyDB() {
     }
   };
 
+  // search
   myDB.getTrips = async (query = {}, maxRecords = 50) => {
     let client;
     try {

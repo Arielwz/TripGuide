@@ -16,6 +16,7 @@ const Nav = function NavigationComponent(props) {
           onClick={async (ev) => {
             ev.preventDefault();
             props.onSearch("");
+            props.history.push("/");
           }}
         >
           Bay Area Trip Guide
@@ -40,11 +41,13 @@ const Nav = function NavigationComponent(props) {
                   "nav-link" + (location.pathname === "/" ? " active" : "")
                 }
                 aria-current="page"
-                to="/"
+                
                 onClick={async (ev) => {
                   ev.preventDefault();
                   props.onSearch("");
+                  props.history.push("/");
                 }}
+                to="/list"
               >
                 List
               </Link>
@@ -62,7 +65,7 @@ const Nav = function NavigationComponent(props) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="#">
+              <Link className="nav-link" to="/">
                 Link
               </Link>
             </li>

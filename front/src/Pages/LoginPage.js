@@ -19,7 +19,7 @@ const LoginPage = function LoginPage(props) {
               return;
             }
             setErrorText("");
-            const response = await fetch("/login", {
+            const response = await fetch("/login", { // 等待服务端返回
               method: "POST", 
               credentials: "same-origin", 
               headers: {
@@ -27,7 +27,7 @@ const LoginPage = function LoginPage(props) {
               },
               body: JSON.stringify(userInfo), 
             });
-            const res = await response.json();
+            const res = await response.json(); //服务端传递的数据
 
             if (res && res.success) {
               props.onLogin && props.onLogin();
