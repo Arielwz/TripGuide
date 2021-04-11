@@ -3,13 +3,6 @@ var router = express.Router();
 
 const myDB = require("../db/MyDB.js");
 
-// get trips
-router.get("/getTrips", async (req, res) => {
-  // if (!req.session.userInfo) {
-  //   return res.status(401).send({ success: false });
-  // }
-  res.send({ trips: await myDB.getTrips(), success: true });
-});
 
 // login
 router.post("/login", async (req, res) => {
@@ -46,7 +39,7 @@ router.get("/logout", async (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.redirect("/index.html");
+    res.redirect("/");
   });
 });
 
@@ -59,7 +52,7 @@ router.get("/getUsers", async (req, res) => {
 // create trips
 router.post("/createTrip", async (req, res) => {
   if (!req.session.userInfo) {
-    res.status(401).send({ success: false, message: "Please sign in first!" });
+    return res.status(401).send({ success: false, message: "Please sign in first!" });
   }
   let uploadPath;
   const trip = req.body;
@@ -87,11 +80,12 @@ router.get("/checkSession", async (req, res) => {
   res.send({ success: true });
 });
 
-// search
+// get trips and search trips
 router.get("/getTrips", async (req, res) => {
   const searchKey = req.query.searchKey;
+  console.log(searchKey);
   const trips = await myDB.getTrips({
-    title: { $regex: searchKey },
+    name: { "$regex": searchKey },
   });
   res.send({ trips, success: true });
 });
