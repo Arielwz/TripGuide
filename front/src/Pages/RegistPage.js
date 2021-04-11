@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import "./Authen.css";
-import PropTypes from "prop-types";
 
-const RegistPage = function RegistPage(props) {
+export default function RegistPage(props) {
   const [userInfo, setUserInfo] = useState({});
   const [errorText, setErrorText] = useState("");
   return (
@@ -14,7 +13,7 @@ const RegistPage = function RegistPage(props) {
           <form id="formRegist" onSubmit={async (ev) => {
             ev.preventDefault();
             if (!userInfo.username || !userInfo.password) {
-              setErrorText("username and password required!");
+              setErrorText("Username and password required!");
               return;
             }
             setErrorText("");
@@ -30,7 +29,7 @@ const RegistPage = function RegistPage(props) {
             if (res && res.success) {
               props.history.push('/login');
             } else {
-              setErrorText( res.message || "Regist failed!");
+              setErrorText( res.message || "Sign up failed!");
             }
           }}>
             <div className="mb-2">
@@ -85,6 +84,4 @@ const RegistPage = function RegistPage(props) {
   );
 }
 
-RegistPage.propTypes = {};
-export default RegistPage;
   

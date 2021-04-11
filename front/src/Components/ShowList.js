@@ -9,7 +9,7 @@ const ShowList =  function ShowList (props) {
     useEffect(
       () => {
         const fetchTrips =  async () => {
-          const response = await fetch(`/getTrips? searchKey=${props.searchKey}`);
+          const response = await fetch(`/getTrips?searchKey=${props.searchKey}`);
           const res = await response.json();
           if (res && res.success) {
             setTrips(res.trips);

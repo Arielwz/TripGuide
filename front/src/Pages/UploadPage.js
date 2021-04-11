@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+
 
 export default function UploadPage(props) {
   const [tripInfo, setTripInfo] = useState({});
@@ -35,7 +35,7 @@ export default function UploadPage(props) {
           if (res && res.success) {
             props.history.push("/");
           } else {
-            setErrorText(res.message || "Create failed!");
+            setErrorText(res.message || "Upload failed!");
           }
         }}
       >
@@ -102,3 +102,4 @@ export default function UploadPage(props) {
     </div>
   );
 }
+
