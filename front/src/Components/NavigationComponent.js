@@ -10,12 +10,12 @@ const Nav = function NavigationComponent(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <div className="navbar-brand" to="/" onClick = {async(ev) => {
+        <Link className="navbar-brand" to="/" onClick = {async(ev) => {
           ev.preventDefault();
           props.onSearch("");
         }}>
           Bay Area Trip Guide
-        </div>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
