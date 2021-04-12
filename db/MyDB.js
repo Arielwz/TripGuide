@@ -10,7 +10,7 @@ function MyDB() {
   myDB.creatUser = async (user) => {
     let client;
     try {
-      client = new MongoClient(url, { useUnifiedTopology: true }); 
+      client = new MongoClient(url, { useUnifiedTopology: true });
       console.log("Connecting to the db");
       await client.connect();
       console.log("Connected!");
@@ -31,15 +31,15 @@ function MyDB() {
   myDB.searchUser = async (query) => {
     let client;
     try {
-      client = new MongoClient(url, { useUnifiedTopology: true }); 
+      client = new MongoClient(url, { useUnifiedTopology: true });
       console.log("Connecting to the db");
-      await client.connect(); 
+      await client.connect();
       console.log("Connected!");
-      const db = client.db(DB_NAME); 
-      const usersCol = db.collection("usersinfo"); 
+      const db = client.db(DB_NAME);
+      const usersCol = db.collection("usersinfo");
 
       console.log("Collection ready, querying with ", query);
-      const users = await usersCol.find(query).toArray(); 
+      const users = await usersCol.find(query).toArray();
       console.log("Got users", users);
 
       return users;
