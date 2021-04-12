@@ -8,7 +8,7 @@ const Nav = function NavigationComponent(props) {
   console.log("Render NavigationComponent", location);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link
           className="navbar-brand"
@@ -49,7 +49,7 @@ const Nav = function NavigationComponent(props) {
                 }}
                 to="/list"
               >
-                List
+                View Trips
               </Link>
             </li>
 

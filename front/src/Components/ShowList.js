@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import {Pagination} from "element-react";
 import 'element-theme-default';
 
-const ShowList =  function ShowList (props) {
+const ShowList = function ShowList (props) {
   const [trips, setTrips] = useState([]);
   const [count, setCount] = useState([]);
   const [page, setPage] = useState(0);
-
   const [selectedTrip, setSelectedTrip] = useState("");
+
   const selectedTripObj = useMemo(
-    () => trips?.find((t) => t.name === selectedTrip),
+    () => trips?.find((t) => t.tag === selectedTrip),
     [selectedTrip, trips]
   );
-   
+
   useEffect(
     () => {
       const fetchTrips = async () => {
@@ -36,26 +36,26 @@ const ShowList =  function ShowList (props) {
     fetchCount();
   }, []);
 
-  console.log(trips, selectedTripObj);
-    
+
   return (
     <div>
-      <label htmlFor="trip-select">Filter trips:</label>
-      <select
+      <h1>Find your favorite trips!</h1>
+      <label htmlFor="trip-select">Filter by tag:</label>
+      {<select
         name="trips"
         id="trips-select"
         onChange={(e) => {
           setSelectedTrip(e.target.value);
         }}
       >
-        <option value="all">All</option>
+        <option value="all" >All</option>
         {trips?.map((trip) => (
-          <option key={trip} value={trip.name}>
-            {trip.name}
+          <option key={trip} value={trip.tag}>
+            {trip.tag}
           </option>
         ))}
-      </select>
-
+      </select>}
+ 
       <Show trips={trips} selectedTripObj={selectedTripObj} />
 
       <div className="first">
@@ -63,21 +63,13 @@ const ShowList =  function ShowList (props) {
           <Pagination
             layout="prev, pager, next"
             total={count.amount}
-            pageSize={3}
+            pageSize={6}
             onCurrentChange={(e) => setPage(e)}
           />
         </div>
       </div>
-
-      {/* <Pagination
-      total={total}
-      page={page}
-      onChangePage={setPage}
-    ></Pagination>
-      <Count count={reload} /> */}
     </div>
   )
-
 }
 
 ShowList.propTypes = {

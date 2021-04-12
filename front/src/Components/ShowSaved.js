@@ -1,4 +1,5 @@
-import Trip from "./Trip"
+import Trip from "./Trip";
+import PropTypes from 'prop-types';
 
 export default function ShowSaved() {
   let arr1 = JSON.parse(localStorage.getItem("saveTrip"))
@@ -10,6 +11,10 @@ export default function ShowSaved() {
       ))}
     </div>
   ) : (
-    "empty save"
+    "Empty save."
   );
 }
+
+ShowSaved.propTypes = {
+  trip: PropTypes.object
+};

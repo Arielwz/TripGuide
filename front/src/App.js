@@ -36,7 +36,7 @@ function App() {
       }} onSearch={(key) => {
         setSearchKey(key);
       }}></NavigationComponent>
-      <div className="container">
+      <div className="container full-width">
         <Switch> 
           <Route path="/login">
             <LoginPage onLogin={() => {

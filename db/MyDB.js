@@ -62,6 +62,7 @@ function MyDB() {
     }
   };
 
+  // get trips
   const nPerPage = 6;
   myDB.getTrips = async (page, query = {} ) => {
     let client;
@@ -72,7 +73,7 @@ function MyDB() {
         .db(DB_NAME)
         .collection("trips")
         .find(query)
-        .skip(page * nPerPage)
+        .skip(page > 0 ? (page - 1) * nPerPage : 0)
         .limit(nPerPage)
         .toArray();
     } finally {
@@ -80,6 +81,7 @@ function MyDB() {
     }
   };
 
+  // count records
   myDB.countData = async (query = {}) => {
     let client;
     try {
@@ -95,10 +97,11 @@ function MyDB() {
     }
   };
 
+
   return myDB;
 }
 
-// count records
+
 
 
 module.exports = MyDB();
