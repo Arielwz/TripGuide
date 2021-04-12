@@ -41,7 +41,6 @@ const Nav = function NavigationComponent(props) {
                   "nav-link" + (location.pathname === "/" ? " active" : "")
                 }
                 aria-current="page"
-                
                 onClick={async (ev) => {
                   ev.preventDefault();
                   props.onSearch("");

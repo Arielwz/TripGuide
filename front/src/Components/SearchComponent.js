@@ -26,12 +26,11 @@ const SearchComponent = function SearchComponent(props) {
         Search
       </button>
     </form>
-
-    );
+  );
 };
 
 SearchComponent.propTypes = {
-    onSearch: PropTypes.func
+  onSearch: PropTypes.func,
 };
 
 export default withRouter(SearchComponent);

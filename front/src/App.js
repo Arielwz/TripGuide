@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ShowSaved from "./Components/ShowSaved";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import NavigationComponent from "./Components/NavigationComponent.js";
 
 function App() {
   const [hasLogin, setLogin] = useState(false);
-  const [searchKey, setSearchKey] = useState('');
+  const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
     const checkLogin = async () => {
       const response = await fetch("/checkSession");
@@ -21,33 +21,39 @@ function App() {
       } else {
         setLogin(false);
       }
-    }
+    };
     checkLogin();
-  }, []);  
+  }, []);
   return (
     <Router>
-      <NavigationComponent hasLogin={hasLogin} onLogout={async () => {
-         const response = await fetch("/checkSession");
-         const res = await response.json();
-   
-         if (res && res.success) {
-           setLogin(false);
-         }
-      }} onSearch={(key) => {
-        setSearchKey(key);
-      }}></NavigationComponent>
+      <NavigationComponent
+        hasLogin={hasLogin}
+        onLogout={async () => {
+          const response = await fetch("/checkSession");
+          const res = await response.json();
+
+          if (res && res.success) {
+            setLogin(false);
+          }
+        }}
+        onSearch={(key) => {
+          setSearchKey(key);
+        }}
+      ></NavigationComponent>
       <div className="container full-width">
-        <Switch> 
+        <Switch>
           <Route path="/login">
-            <LoginPage onLogin={() => {
-              setLogin(true);
-            }}/>
+            <LoginPage
+              onLogin={() => {
+                setLogin(true);
+              }}
+            />
           </Route>
-          <Route path="/regist" component={RegistPage}/>
-          <Route path="/upload" component={UploadPage}/>
-          <Route path="/saved" component={ShowSaved}/>
+          <Route path="/regist" component={RegistPage} />
+          <Route path="/upload" component={UploadPage} />
+          <Route path="/saved" component={ShowSaved} />
           <Route path="/">
-            <HomePage searchKey={searchKey}/>
+            <HomePage searchKey={searchKey} />
           </Route>
         </Switch>
       </div>
@@ -56,4 +62,3 @@ function App() {
 }
 
 export default App;
-

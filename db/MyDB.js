@@ -10,7 +10,7 @@ function MyDB() {
   myDB.creatUser = async (user) => {
     let client;
     try {
-      client = new MongoClient(url, { useUnifiedTopology: true }); //connect to mogoClient
+      client = new MongoClient(url, { useUnifiedTopology: true }); 
       console.log("Connecting to the db");
       await client.connect();
       console.log("Connected!");
@@ -31,15 +31,15 @@ function MyDB() {
   myDB.searchUser = async (query) => {
     let client;
     try {
-      client = new MongoClient(url, { useUnifiedTopology: true }); //connect to mogoClient
+      client = new MongoClient(url, { useUnifiedTopology: true }); 
       console.log("Connecting to the db");
-      await client.connect(); // establish a connection to the server
+      await client.connect(); 
       console.log("Connected!");
-      const db = client.db(DB_NAME); //select specific database
-      const usersCol = db.collection("usersinfo"); //get the collection
+      const db = client.db(DB_NAME); 
+      const usersCol = db.collection("usersinfo"); 
 
       console.log("Collection ready, querying with ", query);
-      const users = await usersCol.find(query).toArray(); //get users in the collection
+      const users = await usersCol.find(query).toArray(); 
       console.log("Got users", users);
 
       return users;
@@ -62,9 +62,9 @@ function MyDB() {
     }
   };
 
-  // get trips
+  // get trips and search trips
   const nPerPage = 6;
-  myDB.getTrips = async (page, query = {} ) => {
+  myDB.getTrips = async (page, query = {}) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -87,21 +87,13 @@ function MyDB() {
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
-      return await client
-        .db(DB_NAME)
-        .collection("trips")
-        .find(query)
-        .count();
+      return await client.db(DB_NAME).collection("trips").find(query).count();
     } finally {
       client.close();
     }
   };
 
-
   return myDB;
 }
-
-
-
 
 module.exports = MyDB();
