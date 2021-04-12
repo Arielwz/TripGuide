@@ -10,7 +10,7 @@ const LoginPage = function LoginPage(props) {
   return (
     <div className="/login">
       <div className="title">
-        <h3>Sign in to upload posts and save your favourite posts.</h3>
+        <h3>Sign in to upload posts:</h3>
       </div>
 
       <div className="row">
@@ -43,7 +43,7 @@ const LoginPage = function LoginPage(props) {
             }}
           >
             <div className="mb-2">
-              <label for="InputUsername" className="form-label">
+              <label htmlFor="InputUsername" className="form-label">
                 Username
               </label>
               <input
@@ -58,7 +58,7 @@ const LoginPage = function LoginPage(props) {
               />
             </div>
             <div className="mb-3">
-              <label for="InputPassword" className="form-label">
+              <label htmlFor="InputPassword" className="form-label">
                 Password
               </label>
               <input

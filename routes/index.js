@@ -1,5 +1,4 @@
 var express = require("express");
-const { async } = require("regenerator-runtime");
 var router = express.Router();
 const myDB = require("../db/MyDB.js");
 

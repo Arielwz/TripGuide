@@ -38,7 +38,7 @@ export default function RegistPage(props) {
             }}
           >
             <div className="mb-2">
-              <label for="InputUsername" className="form-label">
+              <label htmlFor="InputUsername" className="form-label">
                 Username
               </label>
               <input
@@ -53,7 +53,7 @@ export default function RegistPage(props) {
               />
             </div>
             <div className="mb-3">
-              <label for="InputPassword" className="form-label">
+              <label htmlFor="InputPassword" className="form-label">
                 Password
               </label>
               <input
