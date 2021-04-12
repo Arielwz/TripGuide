@@ -62,8 +62,9 @@ function MyDB() {
     }
   };
 
-  // search
-  myDB.getTrips = async (query = {}, maxRecords = 50) => {
+  // get trips
+  const nPerPage = 6;
+  myDB.getTrips = async (page, query = {} ) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -72,14 +73,35 @@ function MyDB() {
         .db(DB_NAME)
         .collection("trips")
         .find(query)
-        .limit(maxRecords)
+        .skip(page > 0 ? (page - 1) * nPerPage : 0)
+        .limit(nPerPage)
         .toArray();
     } finally {
       client.close();
     }
   };
 
+  // count records
+  myDB.countData = async (query = {}) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      return await client
+        .db(DB_NAME)
+        .collection("trips")
+        .find(query)
+        .count();
+    } finally {
+      client.close();
+    }
+  };
+
+
   return myDB;
 }
+
+
+
 
 module.exports = MyDB();

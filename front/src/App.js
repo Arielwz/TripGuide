@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import "./App.css";
-
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ShowSaved from "./Components/ShowSaved";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./Pages/HomePage.js";
 import UploadPage from "./Pages/UploadPage.js";
@@ -37,7 +36,7 @@ function App() {
       }} onSearch={(key) => {
         setSearchKey(key);
       }}></NavigationComponent>
-      <div className="container">
+      <div className="container full-width">
         <Switch> 
           <Route path="/login">
             <LoginPage onLogin={() => {
@@ -46,6 +45,7 @@ function App() {
           </Route>
           <Route path="/regist" component={RegistPage}/>
           <Route path="/upload" component={UploadPage}/>
+          <Route path="/saved" component={ShowSaved}/>
           <Route path="/">
             <HomePage searchKey={searchKey}/>
           </Route>

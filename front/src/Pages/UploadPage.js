@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 export default function UploadPage(props) {
   const [tripInfo, setTripInfo] = useState({});
   const [errorText, setErrorText] = useState("");
