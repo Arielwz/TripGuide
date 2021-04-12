@@ -1,0 +1,7 @@
+.card {
+    width: 25rem;
+}
+
+#card-display {
+    display: flex;
+}

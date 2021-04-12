@@ -64,9 +64,10 @@ const Nav = function NavigationComponent(props) {
                 Upload
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Link
+              <Link className="nav-link" to="/saved">
+                My Favourite
               </Link>
             </li>
           </ul>

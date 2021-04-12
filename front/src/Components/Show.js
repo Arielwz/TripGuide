@@ -1,34 +1,34 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
+import Trip from "./Trip";
 
 
-function Show (props) {
+function Show(props) {
 
-    const renderTrips = () => {
-        // console.log(props.trips);
-        // if (props.trips.success)
-        // return props.trips.trips
-        return (props.trips || [])
-        .map((t) => (
-        <div>
-
-        <p>{t.name}</p>
-        <img src = {t.img} />
-        <p>{t.location}</p>
-        <p>{t.content}</p>
-
-
-        </div>))
-    };
-
-    return (
-        <div className="col">
+    return props.trips ? (
+        <div className="container"> 
+        <div className="row">
+        <div className="col-6 col-sm">
             <h1>Find your favorite trips!</h1>
-            {renderTrips()}
+            <div className="col" id="card-display">
+                {
+                    props.selectedTripObj ?
+                    <Trip trip={props.selectedTripObj}/> :
+                        props.trips.map(t => 
+                        (
+                        <div className="row">
+                        <div className="col-6 col-sm">
+                        <Trip key={t} trip={t}/>`
+                        </div>
+            </div>)
+            )
+            }
         </div>
-    )
+        </div> 
+        </div>
+        </div> 
+    ) : null
 }
-
 
 Show.propTypes = {
     props: PropTypes.array,

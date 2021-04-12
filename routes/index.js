@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
 const myDB = require("../db/MyDB.js");
-
 
 // login
 router.post("/login", async (req, res) => {
@@ -80,15 +78,31 @@ router.get("/checkSession", async (req, res) => {
   res.send({ success: true });
 });
 
-// get trips and search trips
 router.get("/getTrips", async (req, res) => {
   const searchKey = req.query.searchKey;
-  console.log(searchKey);
-  const trips = await myDB.getTrips({
+  const page = +req.query.page || 0;
+  console.log(">>>>>",req);
+  const trips = await myDB.getTrips(
+    page,{
     name: { "$regex": searchKey },
   });
   res.send({ trips, success: true });
 });
 
+// router.get("/getTrips", async (req, res) => {
+
+//   console.log(">>>>>",req);
+//   res.send({ 
+//     trips: await myDB.getTrips(page), 
+//     success: true });
+// });
+
+router.get("/countData", async (req, res) => {
+  const searchKey = req.query.searchKey;
+  const tripCount = await myDB.countData(searchKey);
+  if (tripCount) {
+    res.send({ amount : tripCount });
+  }
+});
 
 module.exports = router;
