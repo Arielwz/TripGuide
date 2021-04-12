@@ -1,10 +1,10 @@
 import Show from "./Show";
-import { useState, useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
-import { Pagination } from "element-react";
-import "element-theme-default";
+import  {useState, useEffect,useMemo} from "react";
+import PropTypes from 'prop-types';
+import {Pagination} from "element-react";
+import 'element-theme-default';
 
-const ShowList = function ShowList(props) {
+const ShowList = function ShowList (props) {
   const [trips, setTrips] = useState([]);
   const [count, setCount] = useState([]);
   const [page, setPage] = useState(0);
@@ -15,16 +15,15 @@ const ShowList = function ShowList(props) {
     [selectedTrip, trips]
   );
 
-  useEffect(() => {
-    const fetchTrips = async () => {
-      const response = await fetch(
-        `/getTrips?searchKey=${props.searchKey}&page=${page}`
-      );
-      const res = await response.json();
-      if (res && res.success) {
-        setTrips(res.trips);
+  useEffect(
+    () => {
+      const fetchTrips = async () => {
+        const response = await fetch(`/getTrips?searchKey=${props.searchKey}&page=${page}`);
+        const res = await response.json();
+        if (res && res.success) {
+          setTrips(res.trips);
+        }
       }
-    };
     fetchTrips();
   }, [props.searchKey, page]);
 
@@ -37,27 +36,26 @@ const ShowList = function ShowList(props) {
     fetchCount();
   }, []);
 
+
   return (
     <div>
       <h1>Find your favorite trips!</h1>
       <label htmlFor="trip-select">Filter by tag:</label>
-      {
-        <select
-          name="trips"
-          id="trips-select"
-          onChange={(e) => {
-            setSelectedTrip(e.target.value);
-          }}
-        >
-          <option value="all">All</option>
-          {trips?.map((trip) => (
-            <option key={trip} value={trip.tag}>
-              {trip.tag}
-            </option>
-          ))}
-        </select>
-      }
-
+      {<select
+        name="trips"
+        id="trips-select"
+        onChange={(e) => {
+          setSelectedTrip(e.target.value);
+        }}
+      >
+        <option value="all" >All</option>
+        {trips?.map((trip) => (
+          <option key={trip} value={trip.tag}>
+            {trip.tag}
+          </option>
+        ))}
+      </select>}
+ 
       <Show trips={trips} selectedTripObj={selectedTripObj} />
 
       <div className="first">
@@ -71,11 +69,12 @@ const ShowList = function ShowList(props) {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 ShowList.propTypes = {
-  searchKey: PropTypes.string,
+  searchKey: PropTypes.string
 };
 
 export default ShowList;
+

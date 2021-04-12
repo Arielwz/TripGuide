@@ -5,7 +5,7 @@
  */
 
 var app = require("../backend");
-var debug = require("debug")("tripguide:server");
+var debug = require("debug")("movieexplorer:server");
 var http = require("http");
 
 /**

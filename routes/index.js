@@ -13,7 +13,7 @@ router.post("/login", async (req, res) => {
     res.send({ success: true });
     return;
   }
-  return res.send({ success: false, message: "Username or password error" });
+  return res.send({ success: false, message: "username or password error" });
 });
 
 // regist
@@ -21,7 +21,7 @@ router.post("/regist", async (req, res) => {
   const userInfo = req.body;
   const userRes = await myDB.searchUser({ username: userInfo.username });
   if (userRes && userRes.length > 0) {
-    return res.send({ success: false, message: "Username already exists" });
+    return res.send({ success: false, message: "username already exists" });
   }
   const newUser = await myDB.creatUser(userInfo);
   if (newUser) {
@@ -29,7 +29,7 @@ router.post("/regist", async (req, res) => {
     return res.send({ success: true });
   }
 
-  return res.send({ success: false, message: "Regist failed" });
+  return res.send({ success: false, message: "regist failed" });
 });
 
 // log out
@@ -48,12 +48,11 @@ router.get("/getUsers", async (req, res) => {
   res.send({ users });
 });
 
+
 // create trips
 router.post("/createTrip", async (req, res) => {
   if (!req.session.userInfo) {
-    return res
-      .status(401)
-      .send({ success: false, message: "Please sign in first!" });
+    return res.status(401).send({ success: false, message: "Please sign in first!" });
   }
   let uploadPath;
   const trip = req.body;
@@ -75,28 +74,33 @@ router.post("/createTrip", async (req, res) => {
 
 // check session
 router.get("/checkSession", async (req, res) => {
+  const userInfo = req.body;
   if (!req.session.userInfo) {
     return res.status(401).send({ success: false });
   }
   res.send({ success: true });
 });
 
-//get trips and search trips
+
 router.get("/getTrips", async (req, res) => {
   const searchKey = req.query.searchKey;
   const page = +req.query.page || 0;
-  const trips = await myDB.getTrips(page, {
-    name: { $regex: searchKey },
+  const trips = await myDB.getTrips(
+    page,{
+    name: { "$regex": searchKey },
   });
   res.send({ trips, success: true });
 });
+
 
 router.get("/countData", async (req, res) => {
   const searchKey = req.query.searchKey;
   const tripCount = await myDB.countData(searchKey);
   if (tripCount) {
-    res.send({ amount: tripCount });
+    res.send({ amount : tripCount });
   }
 });
+
+
 
 module.exports = router;
