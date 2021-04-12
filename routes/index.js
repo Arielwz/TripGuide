@@ -37,7 +37,7 @@ router.get("/logout", async (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.redirect("/");
+    return res.send({ success: true });
   });
 });
 
@@ -75,7 +75,7 @@ router.post("/createTrip", async (req, res) => {
 // check session
 router.get("/checkSession", async (req, res) => {
   if (!req.session.userInfo) {
-    return res.status(401).send({ success: false });
+    return res.send({ success: false });
   }
   res.send({ success: true });
 });

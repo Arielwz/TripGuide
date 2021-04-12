@@ -29,7 +29,7 @@ function App() {
       <NavigationComponent
         hasLogin={hasLogin}
         onLogout={async () => {
-          const response = await fetch("/checkSession");
+          const response = await fetch("/logout");
           const res = await response.json();
 
           if (res && res.success) {

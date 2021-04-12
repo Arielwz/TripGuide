@@ -4,7 +4,7 @@ export default function UploadPage(props) {
   const [tripInfo, setTripInfo] = useState({});
   const [errorText, setErrorText] = useState("");
   return (
-    <div class="col-4">
+    <div className="col-4">
       <br />
       <h2 className="create-info">Create a new Trip</h2>
       {!!errorText && (
@@ -38,10 +38,10 @@ export default function UploadPage(props) {
           }
         }}
       >
-        <label class="form-label">
+        <label className="form-label">
           Title:{" "}
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             onChange={(ev) => {
               setTripInfo({
@@ -52,10 +52,10 @@ export default function UploadPage(props) {
           />
         </label>
         <br />
-        <label class="form-label">
+        <label className="form-label">
           Location:
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             onChange={(ev) => {
               setTripInfo({
@@ -65,7 +65,7 @@ export default function UploadPage(props) {
             }}
           />
         </label>
-        <label class="form-label">
+        <label className="form-label">
           Description:
           <br></br>
           <textarea
@@ -79,10 +79,10 @@ export default function UploadPage(props) {
             }}
           ></textarea>
         </label>
-        <label class="form-label">
+        <label className="form-label">
           Photo:{" "}
           <input
-            class="form-control"
+            className="form-control"
             type="file"
             id="image-upload"
             onChange={(ev) => {
@@ -94,7 +94,7 @@ export default function UploadPage(props) {
           />
         </label>
         <br />
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Create
         </button>
       </form>
