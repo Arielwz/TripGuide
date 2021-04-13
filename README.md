@@ -38,10 +38,10 @@
 - Creat your local `.env` file which contains the MongoDB URL and put it into the project folder
    <br>`.env` file example: `MONGO_URL=mongodb+srv://<username>:<password>.....`
 - For viewing the webapp, start the frontend server
-```
-cd front
-yarn start
-```
+   ```
+   cd front
+   yarn start
+   ```
 - For development, both the frontend server and backend server need to be started. 
    <br> Start the backend server, run  `yarn nodemon`, and visit http://localhost:3001
    <br> Then start the frontend server, run `cd front` `yarn start` and visit http://localhost:3000
