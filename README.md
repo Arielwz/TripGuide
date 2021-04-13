@@ -44,7 +44,7 @@
    ```
 - For development, both the frontend server and backend server need to be started. 
    <br> Start the backend server, run  `yarn nodemon`, and visit http://localhost:3001
-   <br> Then start the frontend server, run `cd front` `yarn start` and visit http://localhost:3000
+   <br> Then start the frontend server, run `cd front`, `yarn start` and visit http://localhost:3000
 
 ## 4. Website At a Glance
 <img width="80%" alt="homepage" src="https://user-images.githubusercontent.com/51281099/114477948-0ed11700-9bb2-11eb-9744-23395ed341ab.png">
